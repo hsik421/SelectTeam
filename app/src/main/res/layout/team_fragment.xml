@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel" type="com.mobile.app.selectteam.ui.main.MainViewModel"/>
+        <variable name="hasDatas" type="Boolean"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.team.TeamFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/result_btn"
+                bind:isGone="@{!hasDatas}"/>
+        <Button
+                android:id="@+id/result_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="submit"
+                android:onClick="@{()->viewModel.onFinishEvent()}"
+                app:layout_constraintTop_toBottomOf="@id/recycler"
+                app:layout_constraintBottom_toBottomOf="parent"
+                bind:isGone="@{!hasDatas}"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Your data is empty"
+                bind:isGone="@{hasDatas}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
